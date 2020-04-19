@@ -1,5 +1,6 @@
 package com.reyes.controller;
 
+import java.net.URI;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.reyes.model.Persona;
 import com.reyes.model.Venta;
@@ -27,7 +29,10 @@ public class VentaController {
 	@PostMapping
 	public ResponseEntity<Venta> registrar(@Valid @RequestBody Venta venta){
 		Venta v = service.registrar(venta);
-		return new ResponseEntity<>(v, HttpStatus.CREATED);			
+		
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(v.getIdVenta()).toUri();
+		
+		return ResponseEntity.created(location).build();			
 	}
 	
 	/*

@@ -17,6 +17,10 @@ public class VentaServiceImpl implements IVentaService{
 	
 	@Override
 	public Venta registrar(Venta obj) {
+		
+		obj.getDetalleVenta().forEach( x -> {
+			x.setVenta(obj);
+		});
 		return repo.save(obj);
 	}
 
