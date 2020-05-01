@@ -1,6 +1,7 @@
 package com.reyes.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,8 @@ public class ProductoServiceImpl implements IProductoService{
 
 	@Override
 	public Producto listarPorId(Integer id) {
-		return null;
+		Optional<Producto> op = repo.findById(id);
+		return op.isPresent() ? op.get() : new Producto();
 	}
 
 	@Override

@@ -43,6 +43,12 @@ public class PersonaController {
 		return ResponseEntity.created(uri).build();	
 	}
 	
+	@GetMapping("/{id}")
+	public ResponseEntity<Persona> listarPorId(@PathVariable("id") Integer id){
+		Persona per = service.listarPorId(id);
+		return new ResponseEntity<Persona>(per, HttpStatus.OK);
+	}
+	
 	@GetMapping
 	public ResponseEntity<List<Persona>> listar(){
 		List<Persona> lista = service.listar();
@@ -53,9 +59,7 @@ public class PersonaController {
 	public ResponseEntity<Object> eliminar(@PathVariable("id") Integer id){
 		Persona p = service.listarPorId(id);
 		service.eliminar(id);
-		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
-		
-		
+		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);		
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.reyes.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,9 @@ public class PersonaServiceImpl implements IPersonaService{
 
 	@Override
 	public Persona listarPorId(Integer id) {
-		return null;
+		Optional<Persona> op = repo.findById(id) ;
+		
+		return op.isPresent() ? op.get() : new Persona();
 	}
 
 	@Override

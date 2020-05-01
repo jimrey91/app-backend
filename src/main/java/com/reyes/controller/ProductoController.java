@@ -49,6 +49,12 @@ public class ProductoController {
 		return new ResponseEntity<List<Producto>>(lista, HttpStatus.OK);
 	}
 	
+	@GetMapping("/{id}")
+	public ResponseEntity<Producto> listarPorId(@PathVariable("id") Integer id){
+		Producto p = service.listarPorId(id);
+		return new ResponseEntity<Producto>(p, HttpStatus.OK);
+	}
+	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> eliminar(@PathVariable("id") Integer id){
 		Producto p = service.listarPorId(id);
